@@ -1,0 +1,13 @@
+.header {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    background-color: #6c1325;
+    position: sticky;
+}
+
+li {
+    display: block;
+}
