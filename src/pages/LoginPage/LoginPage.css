@@ -1,0 +1,14 @@
+.loginpage__form {
+    width: 25%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    min-width: 300px;
+}
+
+.loginpage__formelement {
+    margin-top: 20px;
+}
