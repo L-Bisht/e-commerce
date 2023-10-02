@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
@@ -8,6 +9,7 @@ import { TProduct } from "../../shared/types/productTypes";
 import { productActions } from "../../store/products";
 function Header() {
   const [searchText, setSearchText] = useState<string>("");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const updateProducts = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,9 +18,11 @@ function Header() {
     axios
       .get(productSearchURL.toString())
       .then((res) => productTransformer(res.data))
-      .then((products: Array<TProduct>) =>
-        dispatch(productActions.updateAllProducts(products))
-      );
+      .then((products: Array<TProduct>) => {
+        dispatch(productActions.updateAllProducts(products));
+        navigate(`/products?q=${searchText}`);
+      })
+      .catch((err) => console.log("Product while fetching products", err));
   };
   return (
     <header className="header">
