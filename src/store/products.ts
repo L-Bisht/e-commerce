@@ -1,18 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TProduct } from "../shared/types/productTypes";
 
-const initialState = {
-  allProducts: [],
+type TState = {
+  allProducts: Array<TProduct>;
+};
+const initialState: TState = {
+  allProducts: [] as Array<TProduct>,
 };
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    updateAllProducts(state, action) {
+    updateAllProducts(
+      state: TState,
+      action: { type: string; payload: Array<TProduct> }
+    ) {
       state.allProducts = action.payload;
     },
   },
 });
 
-export const counterActions = productsSlice.actions;
+export const productActions = productsSlice.actions;
 export default productsSlice.reducer;
