@@ -1,6 +1,7 @@
+import ComingSoonPage from "../ComingSoonPage";
 import "./HomePage.css";
 function HomePage() {
-  return <div>HomePage</div>;
+  return <ComingSoonPage pageName="Homepage" />;
 }
 
 export default HomePage;
