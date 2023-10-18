@@ -1,3 +1,4 @@
+import comingSoonImage from "../../assets/images/coming-soon.jpg";
 import "./ComingSoonPage.css";
 
 type TProps = {
@@ -15,7 +16,7 @@ function ComingSoonPage(props: TProps) {
         flexDirection: "column",
       }}
     >
-      <img style={{ width: "300px" }} src="src\assets\images\coming-soon.jpg" />
+      <img style={{ width: "300px" }} src={comingSoonImage} />
       {props.pageName && (
         <h1 style={{ marginTop: "20px" }}>{props.pageName}</h1>
       )}
