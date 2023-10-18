@@ -3,23 +3,30 @@ import * as yup from "yup";
 import { Box, Button, Card, Grid, Stack } from "@mui/material";
 
 import TextField from "../../components/FormsUI/TextField";
-
-import "./LoginPage.css";
 import { Link } from "react-router-dom";
-
-type TLoginFormSchema = {
-  email: string;
-  password: string;
-};
-const INITIAL_FORM_STATE: TLoginFormSchema = { email: "", password: "" };
-const LOGIN_VALIDATIONS = yup.object().shape({
-  email: yup
-    .string()
-    .email("Please enter a valid email")
-    .required("Please enter your email"),
-  password: yup.string().required("Please enter your password"),
-});
-function LoginPage() {
+import "./SignUpPage.css";
+function SignUpPage() {
+  type TSignUpFormSchema = {
+    email: string;
+    password: string;
+    confirmPassword: string;
+  };
+  const INITIAL_FORM_STATE: TSignUpFormSchema = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const LOGIN_VALIDATIONS = yup.object().shape({
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .required("Please enter your email"),
+    password: yup.string().required("Please enter your password"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), ""], "Passwords must match")
+      .required("Please re-enter your password"),
+  });
   return (
     <div className="page">
       <Box
@@ -48,14 +55,21 @@ function LoginPage() {
                   <TextField name="password" type="password" label="Password" />
                 </Grid>
                 <Grid item>
+                  <TextField
+                    name="confirmPassword"
+                    type="password"
+                    label="Confirm Password"
+                  />
+                </Grid>
+                <Grid item>
                   <Stack>
                     <Button type="submit" variant="contained">
-                      LogIn
+                      SignUp
                     </Button>
                   </Stack>
                 </Grid>
                 <Grid item>
-                  Not a user? <Link to="/register">Sign up</Link>
+                  Already a user? <Link to="/login">Log In</Link>
                 </Grid>
               </Grid>
             </Form>
@@ -66,4 +80,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignUpPage;
