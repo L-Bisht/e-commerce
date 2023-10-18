@@ -61,7 +61,7 @@ function Header() {
           }
         />
         <IconButton
-          type="button"
+          type="submit"
           sx={{ p: "5px", color: "black" }}
           aria-label="search"
         >
