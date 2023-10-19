@@ -1,0 +1,23 @@
+.product-card {
+    padding: 24px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    box-shadow: 0px 5px 17px #bfc9d2;
+    cursor: pointer;
+}
+
+.product-card__image {
+    height: 300px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.product-card__add {
+    background-color:#50cccc ;
+}
+
+.product-card__add:hover {
+    background-color: #3c9e9e;
+}

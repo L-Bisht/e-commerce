@@ -3,6 +3,8 @@ export type TProduct = {
   name: string;
   description?: string;
   images?: Array<string>;
+  price?: number
+  rating?: number
 };
 
 export type TDummyJSONProduct = {

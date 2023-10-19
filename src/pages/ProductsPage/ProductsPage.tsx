@@ -4,6 +4,7 @@ import { Grid } from "@mui/material";
 import { TProduct } from "../../shared/types/productTypes";
 import { TRootState } from "../../store/store";
 import "./ProductsPage.css";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 function ProductsPage() {
   const allProducts = useSelector(
@@ -13,17 +14,12 @@ function ProductsPage() {
     <div className="page products-page">
       <Grid
         container
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        spacing={{ xs: 2, md: 2 }}
+        columns={{ xs: 4, sm: 8, md: 10 }}
       >
         {allProducts.map((product: TProduct) => (
-          <Grid item xs={2} sm={4} md={3} key={product.id}>
-            <img
-              src={product.images?.[0]}
-              alt={product.name}
-              style={{ height: "300px", maxWidth: "300px" }}
-            />
-            <div>{product.name}</div>
+          <Grid item xs={4} sm={4} md={2} key={product.id}>
+            <ProductCard {...product}/>
           </Grid>
         ))}
       </Grid>

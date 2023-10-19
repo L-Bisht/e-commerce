@@ -9,11 +9,9 @@ function dummyJSONProductTransformer(
 ): Array<TProduct> {
   return dummyJSONProductResponse.products?.map(
     (product: TDummyJSONProduct): TProduct => {
+      const {id, title, description, images, price, rating} = product;
       return {
-        id: product.id,
-        name: product.title,
-        description: product.description,
-        images: product.images,
+        id, name: title, description, images, price, rating
       };
     }
   );
