@@ -2,11 +2,12 @@ import productTransformer from "../../shared/utils/transformers/productTransform
 import "./Header.css";
 import { TProduct } from "../../shared/types/productTypes";
 import { productActions } from "../../store/products";
+import { TRootState } from '../../store/store'
 
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IconButton, InputBase, Paper, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -14,11 +15,13 @@ import {
   FavoriteBorderOutlined,
   HomeOutlined,
 } from "@mui/icons-material";
+import { authenticationActions } from "../../store/authentication";
 
 function Header() {
   const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state: TRootState) => state.authentication?.isAuthenticated);
   const updateProducts = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const productSearchURL = new URL("https://dummyjson.com/products/search");
@@ -93,13 +96,23 @@ function Header() {
         >
           <ShoppingCartOutlined />
         </IconButton>
-        <Button
-          onClick={() => navigate("/login")}
-          sx={{ borderRadius: "20px" }}
-          variant="contained"
-        >
-          Log in
-        </Button>
+        {isAuthenticated ?
+          (<Button
+            onClick={() => {navigate("/"); dispatch(authenticationActions.logout());}}
+            sx={{ borderRadius: "20px" }}
+            variant="contained"
+          >
+            Logout
+          </Button>)
+          :
+          (<Button
+            onClick={() => navigate("/login")}
+            sx={{ borderRadius: "20px" }}
+            variant="contained"
+          >
+            Log in
+          </Button>)
+        }
       </div>
     </header>
   );

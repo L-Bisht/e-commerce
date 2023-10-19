@@ -1,25 +1,41 @@
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import { Box, Button, Card, Grid, Stack } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import TextField from "../../components/FormsUI/TextField";
+import { authenticationActions } from "../../store/authentication";
 
 import "./LoginPage.css";
-import { Link } from "react-router-dom";
 
 type TLoginFormSchema = {
-  email: string;
+  username: string;
   password: string;
 };
-const INITIAL_FORM_STATE: TLoginFormSchema = { email: "", password: "" };
-const LOGIN_VALIDATIONS = yup.object().shape({
-  email: yup
-    .string()
-    .email("Please enter a valid email")
-    .required("Please enter your email"),
-  password: yup.string().required("Please enter your password"),
-});
 function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const INITIAL_FORM_STATE: TLoginFormSchema = { username: "", password: "" };
+  const LOGIN_VALIDATIONS = yup.object().shape({
+    username: yup
+      .string()
+      .min(3, 'Username must contain 3 or more letters')
+      .required("Please enter your username"),
+    password: yup.string().required("Please enter your password"),
+  });
+  const login = (values: TLoginFormSchema) => {
+    const url = new URL('https://dummyjson.com/auth/login');
+    axios.post(url.toString(), {
+      ...values
+    }).then(res => res.data)
+    .then(data => {
+      dispatch(authenticationActions.login({token: `Bearer ${data.token}`}));
+      navigate('/');
+    })
+    .catch(console.log);
+  }
   return (
     <div className="page">
       <Box
@@ -35,14 +51,12 @@ function LoginPage() {
           <Formik
             initialValues={{ ...INITIAL_FORM_STATE }}
             validationSchema={LOGIN_VALIDATIONS}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={login}
           >
             <Form>
               <Grid container spacing={5} direction="column">
                 <Grid item>
-                  <TextField name="email" label="Email" />
+                  <TextField name="username" label="Username" />
                 </Grid>
                 <Grid item>
                   <TextField name="password" type="password" label="Password" />
