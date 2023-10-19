@@ -1,10 +1,6 @@
 import "./NotFoundPage.css";
 
-type TProps = {
-  pageName?: string;
-};
-
-function NotFoundPage(props: TProps) {
+function NotFoundPage() {
   return (
     <div
       className="page home-page"
