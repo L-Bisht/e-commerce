@@ -8,14 +8,14 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton, InputBase, Paper, Button } from "@mui/material";
+import { IconButton, InputBase, Paper, Button} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   ShoppingCartOutlined,
   FavoriteBorderOutlined,
-  HomeOutlined,
+  HomeOutlined
 } from "@mui/icons-material";
-import { authenticationActions } from "../../store/authentication";
+import LoginMenu from "../LoginMenu";
 
 function Header() {
   const [searchText, setSearchText] = useState<string>("");
@@ -97,13 +97,9 @@ function Header() {
           <ShoppingCartOutlined />
         </IconButton>
         {isAuthenticated ?
-          (<Button
-            onClick={() => {navigate("/"); dispatch(authenticationActions.logout());}}
-            sx={{ borderRadius: "20px" }}
-            variant="contained"
-          >
-            Logout
-          </Button>)
+          (
+            <LoginMenu />
+          )
           :
           (<Button
             onClick={() => navigate("/login")}

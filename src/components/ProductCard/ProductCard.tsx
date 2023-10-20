@@ -31,7 +31,7 @@ function ProductCard({ name, description, images, price, rating }: TProduct) {
 					</Grid>
 				</Grid>
 				<Grid item xs={12}>
-					<Button fullWidth onClick={e => e.stopPropagation()} className="product-card__add" variant="contained">Add to cart</Button>
+					<Button fullWidth onClick={e => e.stopPropagation()} className="product-card__add" sx={{backgroundColor: '#50cccc', ':hover': {backgroundColor: '#3c9e9e'} }} variant="contained">Add to cart</Button>
 				</Grid>
 			</Grid>
 		</Card>

@@ -13,11 +13,3 @@
     width: 100%;
     border-radius: 4px;
 }
-
-.product-card__add {
-    background-color:#50cccc ;
-}
-
-.product-card__add:hover {
-    background-color: #3c9e9e;
-}
