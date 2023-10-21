@@ -33,9 +33,6 @@ const cartSlice = createSlice({
 	reducers: {
 		updateUserCarts(state, action) {
 			state.allCarts = action.payload.carts;
-		},
-		clearCartData(state) {
-			state = initialState;
 		}
 	}
 });

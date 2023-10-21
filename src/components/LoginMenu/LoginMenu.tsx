@@ -11,8 +11,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authenticationActions } from '../../store/authentication';
 
-import { TRootState } from '../../store/store';
-
 function LoginMenu() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
