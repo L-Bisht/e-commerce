@@ -65,7 +65,7 @@ function Header() {
         />
         <IconButton
           type="submit"
-          sx={{ p: "5px", color: "black" }}
+          sx={{ p: "5px", color: "#011627" }}
           aria-label="search"
         >
           <SearchIcon />
@@ -75,7 +75,7 @@ function Header() {
         <IconButton
           onClick={() => navigate("/")}
           type="button"
-          sx={{ p: "10px", color: "black" }}
+          sx={{ p: "10px", color: "#F6F7F8" }}
           aria-label="home"
         >
           <HomeOutlined />
@@ -83,7 +83,7 @@ function Header() {
         <IconButton
           onClick={() => navigate("/wishlist")}
           type="button"
-          sx={{ p: "10px", color: "black" }}
+          sx={{ p: "10px", color: "#F6F7F8" }}
           aria-label="wishlist"
         >
           <FavoriteBorderOutlined />
@@ -91,7 +91,7 @@ function Header() {
         <IconButton
           onClick={() => navigate("/shopping-cart")}
           type="button"
-          sx={{ p: "10px", color: "black" }}
+          sx={{ p: "10px", color: "#F6F7F8" }}
           aria-label="shopping cart"
         >
           <ShoppingCartOutlined />
@@ -103,7 +103,8 @@ function Header() {
           :
           (<Button
             onClick={() => navigate("/login")}
-            sx={{ borderRadius: "20px" }}
+            sx={{ borderRadius: "10px" }}
+            color="error"
             variant="contained"
           >
             Log in

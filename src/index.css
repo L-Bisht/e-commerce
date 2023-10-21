@@ -5,6 +5,13 @@
     - Melon(Pink): #F9B9B7
     - Jasper(Red/Orange): #CD4631
     - Azure(White): #eafbfe
+
+  Colors 2:
+   - Rich black: #011627
+   - Folly: #FF3366
+   - blue: #5386E4
+   - white: #F6F7F8
+   - blue2: #20A4F3
 */
 
 * {
@@ -15,9 +22,7 @@
 
 .page {
   height: 86vh;
-  width: calc(100% - 30px);
-  margin: 0px 5px 5px 5px;
-  padding: 10px;
+  width: 100vw;
   border-radius: 4px;
   overflow-y: scroll;
 }

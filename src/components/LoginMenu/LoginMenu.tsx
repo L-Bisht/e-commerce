@@ -24,20 +24,18 @@ function LoginMenu() {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar sx={{ backgroundColor: '#e36262',width: 32, height: 32 }}>M</Avatar>
-          </IconButton>
-        </Tooltip>
-      </Box>
+      <Tooltip title="Account settings">
+        <IconButton
+          onClick={handleClick}
+          size="small"
+          sx={{ ml: 2 }}
+          aria-controls={open ? 'account-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <Avatar sx={{ backgroundColor: '#CD4631', color: '#F6F7F8', width: 32, height: 32 }}>M</Avatar>
+        </IconButton>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -83,7 +81,7 @@ function LoginMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={() => {handleClose(); dispatch(authenticationActions.logout())}}>
+        <MenuItem onClick={() => { handleClose(); dispatch(authenticationActions.logout()) }}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
