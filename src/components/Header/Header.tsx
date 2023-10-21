@@ -8,7 +8,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton, InputBase, Paper, Button} from "@mui/material";
+import { IconButton, InputBase, Paper, Button, Badge } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   ShoppingCartOutlined,
@@ -22,6 +22,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: TRootState) => state.authentication?.isAuthenticated);
+  const cartItemCount = useSelector((state: TRootState) => state.cart.allCarts?.find(Boolean)?.products?.length)
   const updateProducts = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const productSearchURL = new URL("https://dummyjson.com/products/search");
@@ -94,7 +95,9 @@ function Header() {
           sx={{ p: "10px", color: "#F6F7F8" }}
           aria-label="shopping cart"
         >
-          <ShoppingCartOutlined />
+          <Badge badgeContent={cartItemCount} color="primary">
+            <ShoppingCartOutlined />
+          </Badge>
         </IconButton>
         {isAuthenticated ?
           (
@@ -103,7 +106,7 @@ function Header() {
           :
           (<Button
             onClick={() => navigate("/login")}
-            sx={{ borderRadius: "10px" }}
+            sx={{ borderRadius: "4px" }}
             color="error"
             variant="contained"
           >

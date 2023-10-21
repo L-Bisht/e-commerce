@@ -9,6 +9,7 @@ import TextField from "../../components/FormsUI/TextField";
 import { authenticationActions } from "../../store/authentication";
 
 import "./LoginPage.css";
+import { cartActions } from "../../store/cart";
 
 type TLoginFormSchema = {
   username: string;
@@ -32,6 +33,12 @@ function LoginPage() {
     }).then(res => res.data)
       .then(data => {
         dispatch(authenticationActions.login({ access_token: `Bearer ${data.token}`, userData: {...data} }));
+        const getCartUrl = new URL(`https://dummyjson.com/carts/user/${data.id}`)
+        axios.get(getCartUrl.toString())
+        .then(cartRes => cartRes.data)
+        .then(cartData => {
+          dispatch(cartActions.updateUserCarts({carts: cartData.carts}))
+        })
         navigate('/');
       })
       .catch(console.log);

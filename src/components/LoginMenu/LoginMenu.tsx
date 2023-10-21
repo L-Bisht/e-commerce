@@ -11,10 +11,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authenticationActions } from '../../store/authentication';
 
+import { TRootState } from '../../store/store';
+
 function LoginMenu() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const profileImage = 'https://robohash.org/autquiaut.png';
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -71,7 +74,7 @@ function LoginMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Avatar src={profileImage} /> Profile
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
