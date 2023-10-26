@@ -8,7 +8,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton, InputBase, Paper, Button, Badge } from "@mui/material";
+import { IconButton, InputBase, Paper, Button, Badge, AppBar, Toolbar, Typography, Grid, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   ShoppingCartOutlined,
@@ -37,84 +37,93 @@ function Header() {
       .catch((err) => console.log("Product while fetching products", err));
   };
   return (
-    <header className="header">
-      <div className="header__logobox">
-        <h1 className="header__logo">
-          eCommerce<span style={{ color: "#CD4631" }}>.</span>
-        </h1>
-      </div>
-      <Paper
-        component="form"
-        sx={{
-          p: "2px 4px",
-          display: "flex",
-          alignItems: "center",
-          width: 400,
-          borderRadius: "40px",
-          paddingLeft: "15px",
-        }}
-        onSubmit={updateProducts}
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search products"
-          inputProps={{ "aria-label": "search products in store" }}
-          value={searchText}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setSearchText(e.target.value)
-          }
-        />
-        <IconButton
-          type="submit"
-          sx={{ p: "5px", color: "#011627" }}
-          aria-label="search"
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-      <div className="header__items">
-        <IconButton
-          onClick={() => navigate("/")}
-          type="button"
-          sx={{ p: "10px", color: "#F6F7F8" }}
-          aria-label="home"
-        >
-          <HomeOutlined />
-        </IconButton>
-        <IconButton
-          onClick={() => navigate("/wishlist")}
-          type="button"
-          sx={{ p: "10px", color: "#F6F7F8" }}
-          aria-label="wishlist"
-        >
-          <FavoriteBorderOutlined />
-        </IconButton>
-        <IconButton
-          onClick={() => navigate("/shopping-cart")}
-          type="button"
-          sx={{ p: "10px", color: "#F6F7F8" }}
-          aria-label="shopping cart"
-        >
-          <Badge badgeContent={cartItemCount} color="primary">
-            <ShoppingCartOutlined />
-          </Badge>
-        </IconButton>
-        {isAuthenticated ?
-          (
-            <LoginMenu />
-          )
-          :
-          (<Button
-            onClick={() => navigate("/login")}
-            sx={{ borderRadius: "4px" }}
-            color="error"
-            variant="contained"
-          >
-            Log in
-          </Button>)
-        }
-      </div>
-    </header>
+    <AppBar position="sticky" sx={{ backgroundColor: '#011627', color: 'F6F7F8' }}>
+      <Toolbar>
+        <Grid container columns={{ xs: 12 }}>
+          <Grid item xs={4}>
+            <Typography variant="h4" fontWeight="700">
+              eCommerce<Typography variant="inherit" color="error" display="inline">.</Typography>
+            </Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Stack width="100%" flexDirection='row' justifyContent='center'>
+              <Paper
+                component="form"
+                sx={{
+                  p: "2px 4px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: 400,
+                  borderRadius: "40px",
+                  paddingLeft: "15px",
+                }}
+                onSubmit={updateProducts}
+              >
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search products"
+                  inputProps={{ "aria-label": "search products in store" }}
+                  value={searchText}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setSearchText(e.target.value)
+                  }
+                />
+                <IconButton
+                  type="submit"
+                  sx={{ p: "5px", color: "#011627" }}
+                  aria-label="search"
+                >
+                  <SearchIcon />
+                </IconButton>
+              </Paper>
+            </Stack>
+          </Grid>
+          <Grid item xs={4}>
+            <Stack width="100%" flexDirection='row' justifyContent='right'>
+              <IconButton
+                onClick={() => navigate("/")}
+                type="button"
+                sx={{ p: "10px", color: "#F6F7F8" }}
+                aria-label="home"
+              >
+                <HomeOutlined />
+              </IconButton>
+              <IconButton
+                onClick={() => navigate("/wishlist")}
+                type="button"
+                sx={{ p: "10px", color: "#F6F7F8" }}
+                aria-label="wishlist"
+              >
+                <FavoriteBorderOutlined />
+              </IconButton>
+              <IconButton
+                onClick={() => navigate("/shopping-cart")}
+                type="button"
+                sx={{ p: "10px", color: "#F6F7F8" }}
+                aria-label="shopping cart"
+              >
+                <Badge badgeContent={cartItemCount} color="primary">
+                  <ShoppingCartOutlined />
+                </Badge>
+              </IconButton>
+              {isAuthenticated ?
+                (
+                  <LoginMenu />
+                )
+                :
+                (<Button
+                  onClick={() => navigate("/login")}
+                  color="error"
+                  variant="contained"
+                >
+                  Log in
+                </Button>)
+              }
+            </Stack>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 }
 

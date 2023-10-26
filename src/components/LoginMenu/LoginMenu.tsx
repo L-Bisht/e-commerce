@@ -8,14 +8,17 @@ import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authenticationActions } from '../../store/authentication';
+import { TRootState } from '../../store/store'
+import { TUserData } from '../../store/authentication';
+
 
 function LoginMenu() {
   const dispatch = useDispatch();
+  const {firstName = '', image: profileImage = ''}: TUserData = useSelector((state: TRootState) => state.authentication.userData);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const profileImage = 'https://robohash.org/autquiaut.png';
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,7 +36,7 @@ function LoginMenu() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ backgroundColor: '#CD4631', color: '#F6F7F8', width: 32, height: 32 }}>M</Avatar>
+          <Avatar sx={{ backgroundColor: '#CD4631', color: '#F6F7F8', width: 32, height: 32 }}>{firstName?.[0] || ''}</Avatar>
         </IconButton>
       </Tooltip>
       <Menu

@@ -1,9 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+
+export type TUserData = {
+  id: number,
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  gender: string,
+  image: string,
+  token: string
+}
+type TInitialState = {
+  isAuthenticated: boolean,
+  access_token: string,
+  userData: TUserData
+}
+const initialState: TInitialState = {
   isAuthenticated: false,
   access_token: "",
-  userData: {}
+  userData: {} as TUserData
 };
 
 
@@ -21,7 +37,7 @@ const authenticationSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
       state.access_token = '';
-      state.userData = {}
+      state.userData = {} as TUserData
     },
   },
 });
