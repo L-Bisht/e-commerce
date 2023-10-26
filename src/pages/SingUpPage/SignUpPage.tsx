@@ -28,15 +28,14 @@ function SignUpPage() {
       .required("Please re-enter your password"),
   });
   return (
-    <div className="page">
       <Box
         sx={{
-          width: "100%",
-          height: "100%",
+          height: "90vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
+        className="page"
       >
         <Card variant="outlined" sx={{ padding: "60px 40px", width: "300px" }}>
           <Formik
@@ -76,7 +75,6 @@ function SignUpPage() {
           </Formik>
         </Card>
       </Box>
-    </div>
   );
 }
 

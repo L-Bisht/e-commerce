@@ -50,6 +50,7 @@ function LoginPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        height: '90vh'
       }}
     >
       <Card variant="outlined" sx={{ padding: "40px 40px", width: "300px" }}>

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 import { TProduct } from "../../shared/types/productTypes";
 import { TRootState } from "../../store/store";
@@ -11,7 +11,7 @@ function ProductsPage() {
     (state: TRootState) => state.products.allProducts
   );
   return (
-    <div className="page products-page">
+    <Box className="products-page">
       <Grid
         container
         spacing={{ xs: 2, md: 2 }}
@@ -23,7 +23,7 @@ function ProductsPage() {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Box>
   );
 }
 
