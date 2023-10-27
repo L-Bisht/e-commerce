@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type TCartProduct = {
+export type TCartProduct = {
 	id: number;
 	title: string;
 	price: number;
@@ -8,9 +8,10 @@ type TCartProduct = {
 	total: number;
 	discountPercentage: number;
 	discountedPrice: number;
+	thumbnail: string;
 }
 
-type TCart = {
+export type TCart = {
   id: number;
   products: Array<TCartProduct>
   total: number;

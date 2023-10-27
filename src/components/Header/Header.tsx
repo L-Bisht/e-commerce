@@ -37,7 +37,7 @@ function Header() {
       .catch((err) => console.log("Product while fetching products", err));
   };
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: '#011627', color: 'F6F7F8' }}>
+    <AppBar variant='elevation' position="sticky" sx={{ backgroundColor: '#011627', color: 'F6F7F8' }}>
       <Toolbar>
         <Grid container columns={{ xs: 12 }}>
           <Grid item xs={4}>
@@ -88,27 +88,29 @@ function Header() {
               >
                 <HomeOutlined />
               </IconButton>
-              <IconButton
-                onClick={() => navigate("/wishlist")}
-                type="button"
-                sx={{ p: "10px", color: "#F6F7F8" }}
-                aria-label="wishlist"
-              >
-                <FavoriteBorderOutlined />
-              </IconButton>
-              <IconButton
-                onClick={() => navigate("/shopping-cart")}
-                type="button"
-                sx={{ p: "10px", color: "#F6F7F8" }}
-                aria-label="shopping cart"
-              >
-                <Badge badgeContent={cartItemCount} color="primary">
-                  <ShoppingCartOutlined />
-                </Badge>
-              </IconButton>
               {isAuthenticated ?
                 (
-                  <LoginMenu />
+                  <>
+                    <IconButton
+                      onClick={() => navigate("/wishlist")}
+                      type="button"
+                      sx={{ p: "10px", color: "#F6F7F8" }}
+                      aria-label="wishlist"
+                    >
+                      <FavoriteBorderOutlined />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => navigate("/shopping-cart")}
+                      type="button"
+                      sx={{ p: "10px", color: "#F6F7F8" }}
+                      aria-label="shopping cart"
+                    >
+                      <Badge badgeContent={cartItemCount} color="primary">
+                        <ShoppingCartOutlined />
+                      </Badge>
+                    </IconButton>
+                    <LoginMenu />
+                  </>
                 )
                 :
                 (<Button
