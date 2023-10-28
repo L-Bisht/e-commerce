@@ -12,10 +12,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authenticationActions } from '../../store/authentication';
 import { TRootState } from '../../store/store'
 import { TUserData } from '../../store/authentication';
+import { useNavigate } from 'react-router-dom';
 
 
 function LoginMenu() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {firstName = '', image: profileImage = ''}: TUserData = useSelector((state: TRootState) => state.authentication.userData);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -84,7 +86,7 @@ function LoginMenu() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={() => { handleClose(); dispatch(authenticationActions.logout()) }}>
+        <MenuItem onClick={() => { handleClose(); dispatch(authenticationActions.logout()); navigate('/') }}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
