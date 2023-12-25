@@ -4,7 +4,7 @@ import {
   TProduct,
 } from "../../types/productTypes";
 
-function dummyJSONProductTransformer(
+function dummyJSONProductsTransformer(
   dummyJSONProductResponse: TDummyJSONProductResponse
 ): Array<TProduct> {
   return dummyJSONProductResponse.products?.map(
@@ -16,4 +16,6 @@ function dummyJSONProductTransformer(
     }
   );
 }
-export default dummyJSONProductTransformer;
+
+
+export default dummyJSONProductsTransformer;

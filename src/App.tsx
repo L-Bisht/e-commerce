@@ -9,6 +9,7 @@ import WishListPage from "./pages/WishlistPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SignUpPage from "./pages/SingUpPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignUpPage />} />
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products/:productId" element={<ProductPage />} />
         <Route path="/wishlist" element={<WishListPage />} />
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
         <Route path="*" element={<NotFoundPage />} />

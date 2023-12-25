@@ -2,10 +2,12 @@ import { Button, Card, Grid, Rating, Typography } from "@mui/material"
 
 import './ProductCard.css'
 import { TProduct } from "../../shared/types/productTypes"
-
-function ProductCard({ name, description, images, price, rating }: TProduct) {
+type TProps = TProduct & {
+	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
+function ProductCard({ name, description, images, price, rating, handleClick }: TProps) {
 	return (
-		<Card className="product-card" variant="outlined">
+		<Card onClick={handleClick} className="product-card" variant="outlined">
 			<Grid container spacing={3} justifyContent='space-between'>
 				<Grid xs={12} textAlign='center' item>
 					<img

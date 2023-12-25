@@ -1,27 +1,33 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { TCartProduct } from "../../store/cart";
+import ItemCounter from "../ItemCounter/ItemCounter";
 
 type TProps = {
-    item: TCartProduct;
+	item: TCartProduct;
 }
 
 const CartItem = (props: TProps) => {
-    return <Box height='100px' padding='10px' width='100%'>
-        <Grid container spacing={2}>
-            <Grid item xs={2}>
-                <img width="100%" height="100%" src={props.item.thumbnail} />
-            </Grid>
-            <Grid item xs={4}>
-                <Typography variant='h6'>{props.item.title}</Typography>
-            </Grid>
-            <Grid item xs={3}>
-                {`$${props.item.discountedPrice}`}
-            </Grid>
-            <Grid item xs={3}>
-                <Button variant="text">Delete</Button>
-            </Grid>
-        </Grid>
-    </Box>
+	return <Stack height='100%' padding='10px' width='100%' alignItems='center' justifyContent='center'>
+		<Grid container spacing={2}>
+			<Grid item xs={2}>
+				<Box height='100%'>
+					<img height='60px' src={props.item.thumbnail} />
+				</Box>
+			</Grid>
+			<Grid item xs={4}>
+				<Typography variant='h6'>{props.item.title}</Typography>
+			</Grid>
+			<Grid item xs={2}>
+				<ItemCounter />
+			</Grid>
+			<Grid item xs={2}>
+				<Typography variant='h6'>{`$${props.item.discountedPrice}`}</Typography>
+			</Grid>
+			<Grid item xs={2}>
+				<Button variant="text" color='error'>Delete</Button>
+			</Grid>
+		</Grid>
+	</Stack>
 }
 
 export default CartItem;
