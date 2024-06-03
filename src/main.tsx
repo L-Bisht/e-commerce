@@ -10,7 +10,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App.tsx";
 import "./index.css";
-import store from "./store/store";
+import store from "./store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

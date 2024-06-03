@@ -1,20 +1,18 @@
 import { Box } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { TDummyJSONProduct } from "../../shared/types/productTypes";
 import ProductImages from "../../components/ProductImages";
+import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
+import { useEffect } from "react";
+import { fetchProduct, productSelector } from "../../store/productSlice";
+import { useSelector } from "react-redux";
 
 const ProductPage = () => {
-  const params = useParams();
-  const [product, setProduct] = useState<TDummyJSONProduct>(
-    {} as TDummyJSONProduct
-  );
+  const { productId = "" } = useParams();
+  const dispatch = useAppDispatch();
+  const product = useSelector(productSelector);
   useEffect(() => {
-    const productId = params.productId;
-    const url = new URL(`https://dummyjson.com/products/${productId}`);
-    axios.get(url.toString()).then((res) => setProduct(res.data));
-  });
+    dispatch(fetchProduct({ productId }));
+  }, [productId, dispatch]);
   return (
     <Box>
       <ProductImages images={product.images || []} />

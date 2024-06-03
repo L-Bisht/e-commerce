@@ -3,8 +3,9 @@ export type TProduct = {
   name: string;
   description?: string;
   images?: Array<string>;
-  price?: number
-  rating?: number
+  price?: number;
+  rating?: number;
+  category?: string;
 };
 
 export type TDummyJSONProduct = {

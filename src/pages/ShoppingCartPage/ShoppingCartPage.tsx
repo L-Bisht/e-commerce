@@ -1,15 +1,7 @@
-import {
-  Box,
-  Card,
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { Box, Card, Divider, Grid, Typography } from "@mui/material";
 import "./ShoppingCartPage.css";
 import { useSelector } from "react-redux";
-import { TRootState } from "../../store/store";
+import { TRootState } from "../../store";
 import CartItem from "../../components/CartItem";
 
 function ShoppingCartPage() {
@@ -27,9 +19,7 @@ function ShoppingCartPage() {
                 {currentCart.products?.map((cartItem, i, allItems) => (
                   <>
                     <CartItem key={cartItem.id} item={cartItem} />
-                    {i < allItems.length - 1 && (
-                      <Divider variant="fullWidth" />
-                    )}
+                    {i < allItems.length - 1 && <Divider variant="fullWidth" />}
                   </>
                 ))}
               </Box>

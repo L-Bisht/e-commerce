@@ -1,27 +1,34 @@
-import { useSelector } from "react-redux";
 import { Box, Grid } from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { TProduct } from "../../shared/types/productTypes";
-import { TRootState } from "../../store/store";
 import "./ProductsPage.css";
+import { TProduct } from "../../shared/types/productTypes";
 import ProductCard from "../../components/ProductCard/ProductCard";
-import { useNavigate } from "react-router-dom";
+import { fetchProducts, productsSelector } from "../../store/productsSlice";
+import { useEffect } from "react";
+import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
 
 function ProductsPage() {
   const navigate = useNavigate();
-  const allProducts = useSelector(
-    (state: TRootState) => state.products.allProducts
-  );
+  const dispatch = useAppDispatch();
+  const allProducts = useSelector(productsSelector);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
+
+  useEffect(() => {
+    dispatch(fetchProducts({ query }));
+  }, [dispatch, query]);
+
   return (
-    <Box className="products-page">
-      <Grid
-        container
-        spacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 4, sm: 8, md: 10 }}
-      >
+    <Box className="page products__page">
+      <Grid spacing={2} container>
         {allProducts.map((product: TProduct) => (
-          <Grid item xs={4} sm={4} md={2} key={product.id}>
-            <ProductCard handleClick={() => navigate(`/products/${product.id}`)} {...product}/>
+          <Grid item xs={12} sm={4} md={3} key={product.id}>
+            <ProductCard
+              handleClick={() => navigate(`/products/${product.id}`)}
+              {...product}
+            />
           </Grid>
         ))}
       </Grid>

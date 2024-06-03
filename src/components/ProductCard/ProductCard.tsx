@@ -1,43 +1,67 @@
-import { Button, Card, Grid, Rating, Typography } from "@mui/material"
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+} from "@mui/material";
+import GradeIcon from "@mui/icons-material/Grade";
 
-import './ProductCard.css'
-import { TProduct } from "../../shared/types/productTypes"
+import "./ProductCard.css";
+import { TProduct } from "../../shared/types/productTypes";
+
 type TProps = TProduct & {
-	handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-}
-function ProductCard({ name, description, images, price, rating, handleClick }: TProps) {
-	return (
-		<Card onClick={handleClick} className="product-card" variant="outlined">
-			<Grid container spacing={3} justifyContent='space-between'>
-				<Grid xs={12} textAlign='center' item>
-					<img
-						src={images?.[0]}
-						alt={name}
-						className="product-card__image"
-					/>
-				</Grid>
-				<Grid xs={12} spacing={3} item>
-					<Grid xs={12} item>
-						<Typography variant="h6" className="truncate-text">{name}</Typography>
-					</Grid>
-					<Grid xs={12} item>
-						<Typography variant="body2" color="#939393" className="truncate-text">{description}</Typography>
-					</Grid>
-					<Grid xs={12} container>
-						<Grid xs={6} item>
-							<Typography variant="h5" fontWeight='600'>$ {price}</Typography>
-						</Grid>
-						<Grid xs={6} textAlign='right' item>
-							<Typography variant="subtitle2" color='green'>Rating: {rating}<Rating value={rating} size="small" precision={0.1} readOnly /></Typography>
-						</Grid>
-					</Grid>
-				</Grid>
-				<Grid item xs={12}>
-					<Button fullWidth onClick={e => e.stopPropagation()} color="error" variant="contained">Add to cart</Button>
-				</Grid>
-			</Grid>
-		</Card>
-	)
+  handleClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+};
+
+function ProductCard({
+  name,
+  images,
+  price,
+  rating,
+  handleClick,
+  category,
+}: TProps) {
+  return (
+    <Card sx={{ borderRadius: "8px", width: "349" }} variant="outlined">
+      <CardActionArea
+        onClick={handleClick}
+        sx={{ pt: "12px", pl: "12px", pr: "12px" }}
+      >
+        <CardMedia
+          className="product-card__image"
+          component="img"
+          height="300"
+          image={images?.[0]}
+          alt={name}
+        />
+        <CardContent>
+          <Stack spacing={2}>
+            <Stack minWidth={0} direction="row" spacing={1}>
+              <Stack minWidth={0} width="100%" direction="column" spacing={0.5}>
+                <Typography noWrap fontWeight="bold" variant="body1">
+                  {name}
+                </Typography>
+                <Typography noWrap variant="body2" color="gray">
+                  {category}
+                </Typography>
+              </Stack>
+              <Typography fontWeight="bold" variant="body1">
+                ${price}
+              </Typography>
+            </Stack>
+            <Stack direction="row" spacing={0.25} alignItems="center">
+              <GradeIcon color="warning" fontSize="small" />
+              <Typography variant="body2" color="gray">
+                {rating}
+              </Typography>
+            </Stack>
+          </Stack>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
 }
 
-export default ProductCard
+export default ProductCard;

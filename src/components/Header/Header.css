@@ -1,4 +1,4 @@
-.header {
+/* .header {
     height: 10vh;
     position: sticky;
     top: 0;
@@ -9,4 +9,14 @@
     background-color:  #011627;
     color: #F6F7F8;
     padding: 0 20px;
+} */
+
+
+
+.header {
+  position: sticky; /* Sticks to top when scrolling */
+  top: 0;          /* Places it at the very top */
+  background-color: #011627; /* Example background */
+  z-index: 10;     /* Ensure header is above content */
+  /* Add padding, styling, etc. as needed */
 }

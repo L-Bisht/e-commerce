@@ -1,18 +1,26 @@
-import { Button, Stack, TextField, Typography } from "@mui/material"
+import { Button, Stack, Typography } from "@mui/material";
 
 type TProps = {
-    count: number,
-    setCount: Function,
-}
+  count: number;
+  setCount: (count: number) => void;
+};
 
-const ItemCounter = ({count = 0, setCount}: TProps) => {
+const ItemCounter = ({ count = 0, setCount }: TProps) => {
   return (
-    <Stack height='70%' direction='row' alignItems='center'>
-        <Button variant='text' onClick={() => setCount(count - 1)} color='error'>-</Button>
-        <Typography variant='subtitle1'>{count}</Typography>
-        <Button variant='text' onClick={() => setCount(count + 1)} color='success'>+</Button>
+    <Stack height="70%" direction="row" alignItems="center">
+      <Button variant="text" onClick={() => setCount(count - 1)} color="error">
+        -
+      </Button>
+      <Typography variant="subtitle1">{count}</Typography>
+      <Button
+        variant="text"
+        onClick={() => setCount(count + 1)}
+        color="success"
+      >
+        +
+      </Button>
     </Stack>
-  )
-}
+  );
+};
 
-export default ItemCounter
+export default ItemCounter;

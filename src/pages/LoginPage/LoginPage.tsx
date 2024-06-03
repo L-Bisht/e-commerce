@@ -1,94 +1,78 @@
 import { Form, Formik } from "formik";
 import * as yup from "yup";
-import { Box, Button, Card, Grid, Stack, Typography } from "@mui/material";
+import { Button, Divider, Stack, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 
 import TextField from "../../components/FormsUI/TextField";
-import { authenticationActions } from "../../store/authentication";
 
 import "./LoginPage.css";
-import { cartActions } from "../../store/cart";
+import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
+import { loginUser } from "../../store/authenticationSlice";
 
 type TLoginFormSchema = {
   username: string;
   password: string;
 };
+
+const INITIAL_FORM_STATE: TLoginFormSchema = { username: "", password: "" };
+const LOGIN_VALIDATIONS = yup.object().shape({
+  username: yup
+    .string()
+    .min(3, "Username must contain 3 or more letters")
+    .required("Please enter your username"),
+  password: yup.string().required("Please enter your password"),
+});
+
 function LoginPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const INITIAL_FORM_STATE: TLoginFormSchema = { username: "", password: "" };
-  const LOGIN_VALIDATIONS = yup.object().shape({
-    username: yup
-      .string()
-      .min(3, 'Username must contain 3 or more letters')
-      .required("Please enter your username"),
-    password: yup.string().required("Please enter your password"),
-  });
   const login = (values: TLoginFormSchema) => {
-    const url = new URL('https://dummyjson.com/auth/login');
-    axios.post(url.toString(), {
-      ...values
-    }).then(res => res.data)
-      .then(data => {
-        dispatch(authenticationActions.login({ access_token: `Bearer ${data.token}`, userData: {...data} }));
-        const getCartUrl = new URL(`https://dummyjson.com/carts/user/${data.id}`)
-        axios.get(getCartUrl.toString())
-        .then(cartRes => cartRes.data)
-        .then(cartData => {
-          dispatch(cartActions.updateUserCarts({carts: cartData.carts}))
-        })
-        navigate('/');
-      })
-      .catch(console.log);
-  }
+    const payload = {
+      username: values.username,
+      password: values.password,
+    };
+    dispatch(loginUser(payload));
+    navigate("/");
+  };
   return (
-    <Box
+    <Stack
       className="page"
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: '90vh'
-      }}
+      maxWidth="440px"
+      mt={4}
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
     >
-      <Card variant="outlined" sx={{ padding: "40px 40px", width: "300px" }}>
-        <Formik
-          initialValues={{ ...INITIAL_FORM_STATE }}
-          validationSchema={LOGIN_VALIDATIONS}
-          onSubmit={login}
-        >
-          <Form>
-            <Grid container spacing={4} direction="column">
-              <Grid item>
-                <Stack alignItems="center">
-                  <Typography fontWeight='500' variant="h4">Login</Typography>
-                </Stack>
-              </Grid>
-              <Grid item>
-                <TextField name="username" label="Username" />
-              </Grid>
-              <Grid item>
-                <TextField name="password" type="password" label="Password" />
-              </Grid>
-              <Grid item>
-                <Stack>
-                  <Button type="submit" variant="contained">
-                    LogIn
-                  </Button>
-                </Stack>
-              </Grid>
-              <Grid item>
-                <Typography>
-                  Not a user? <Link to="/register">Sign up</Link>
-                </Typography>
-              </Grid>
-            </Grid>
-          </Form>
-        </Formik>
-      </Card>
-    </Box>
+      <Formik
+        initialValues={{ ...INITIAL_FORM_STATE }}
+        validationSchema={LOGIN_VALIDATIONS}
+        onSubmit={login}
+      >
+        <Form>
+          <Stack maxWidth="100vw" spacing={4}>
+            <Typography fontWeight="bold" variant="h4">
+              Login
+            </Typography>
+            <TextField name="username" label="Username" />
+            <TextField
+              fullWidth
+              name="password"
+              type="password"
+              label="Password"
+            />
+            <Button type="submit" variant="contained">
+              LogIn
+            </Button>
+            <Divider>
+              <Typography variant="body2">OR</Typography>
+            </Divider>
+            <Typography>
+              New user? <Link to="/register">Sign up</Link>
+            </Typography>
+          </Stack>
+        </Form>
+      </Formik>
+    </Stack>
   );
 }
 
