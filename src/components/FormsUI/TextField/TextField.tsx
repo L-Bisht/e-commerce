@@ -16,7 +16,7 @@ function TextField({ name, ...props }: TProps) {
     configTextField.error = true;
     configTextField.helperText = metaData.error;
   }
-  return <TextFieldMui {...configTextField} />;
+  return <TextFieldMui size="small" {...configTextField} />;
 }
 
 export default TextField;

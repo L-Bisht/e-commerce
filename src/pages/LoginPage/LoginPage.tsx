@@ -4,8 +4,6 @@ import { Button, Divider, Stack, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 import TextField from "../../components/FormsUI/TextField";
-
-import "./LoginPage.css";
 import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
 import { loginUser } from "../../store/authenticationSlice";
 
@@ -35,21 +33,14 @@ function LoginPage() {
     navigate("/");
   };
   return (
-    <Stack
-      className="page"
-      maxWidth="440px"
-      mt={4}
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Stack alignItems="center">
       <Formik
         initialValues={{ ...INITIAL_FORM_STATE }}
         validationSchema={LOGIN_VALIDATIONS}
         onSubmit={login}
       >
         <Form>
-          <Stack maxWidth="100vw" spacing={4}>
+          <Stack width="440px" spacing={4} alignItems="center">
             <Typography fontWeight="bold" variant="h4">
               Login
             </Typography>
@@ -60,15 +51,18 @@ function LoginPage() {
               type="password"
               label="Password"
             />
-            <Button type="submit" variant="contained">
+            <Button fullWidth type="submit" variant="contained">
               LogIn
             </Button>
-            <Divider>
+            <Divider flexItem>
               <Typography variant="body2">OR</Typography>
             </Divider>
-            <Typography>
-              New user? <Link to="/register">Sign up</Link>
-            </Typography>
+            <Stack direction="row" spacing={0.5}>
+              <Typography>New user? </Typography>
+              <Link style={{ textDecoration: "none" }} to="/register">
+                <Typography color="#0EA5E9">Create an account</Typography>
+              </Link>
+            </Stack>
           </Stack>
         </Form>
       </Formik>

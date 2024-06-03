@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import ProductImages from "../../components/ProductImages";
 import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
-import { useEffect } from "react";
 import { fetchProduct, productSelector } from "../../store/productSlice";
-import { useSelector } from "react-redux";
 
 const ProductPage = () => {
   const { productId = "" } = useParams();
