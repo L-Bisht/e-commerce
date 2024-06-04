@@ -6,7 +6,7 @@ type TProps = {
 };
 
 function ProductImages({ images = [] }: TProps) {
-  const [selectedImage, setSelectedImage] = useState<string>(images[0]);
+  const [selectedImage, setSelectedImage] = useState<string>(() => images[0]);
   return (
     <Stack direction="row" spacing={1}>
       <Stack direction="column" spacing={1}>

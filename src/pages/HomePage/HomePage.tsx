@@ -35,7 +35,7 @@ function HomePage() {
                 <Typography fontWeight="600" variant="h4">
                   Upto 50% off
                 </Typography>
-                <Button variant="contained" size="large" color="error">
+                <Button variant="contained" size="large">
                   <Typography variant="h6">Shop Now</Typography>
                 </Button>
               </Stack>
@@ -70,7 +70,7 @@ function HomePage() {
                 <Typography fontWeight="600" variant="h4">
                   Upto 30% off
                 </Typography>
-                <Button variant="contained" size="large" color="error">
+                <Button variant="contained" size="large" color="secondary">
                   <Typography variant="h6">Shop Now</Typography>
                 </Button>
               </Stack>
@@ -105,11 +105,7 @@ function HomePage() {
                 <Typography color="#111827" fontWeight="600" variant="h4">
                   Exclusive collection for everyone
                 </Typography>
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{ backgroundColor: "#111827", borderRadius: "40px" }}
-                >
+                <Button variant="contained" size="large">
                   <Typography variant="h6">Explore Now</Typography>
                 </Button>
               </Stack>

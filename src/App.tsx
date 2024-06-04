@@ -14,8 +14,15 @@ import "./App.css";
 
 const theme = createTheme({
   palette: {
-    secondary: {
+    primary: {
       main: "#111827",
+    },
+    secondary: {
+      main: "#0EA5E9",
+    },
+    text: {
+      primary: "#111827",
+      secondary: "#4B5563",
     },
   },
 });

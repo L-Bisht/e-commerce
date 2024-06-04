@@ -37,11 +37,7 @@ function Header() {
     });
   };
   return (
-    <AppBar
-      variant="elevation"
-      position="sticky"
-      style={{ background: "secondary.main", color: "#fff" }}
-    >
+    <AppBar variant="elevation" position="sticky">
       <Toolbar>
         <Stack
           p={2}
@@ -81,7 +77,7 @@ function Header() {
             ) : (
               <Button
                 onClick={() => navigate("/login")}
-                color="error"
+                color="secondary"
                 variant="contained"
               >
                 Log in
