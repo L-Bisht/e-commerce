@@ -1,9 +1,18 @@
-import { TextField as TextFieldMui, TextFieldProps } from "@mui/material";
+import {
+  TextField as TextFieldMui,
+  TextFieldProps,
+  styled,
+} from "@mui/material";
 import { useField } from "formik";
 type TProps = {
   name: string;
   [key: string]: any;
 };
+
+const StyledTextField = styled(TextFieldMui)<TextFieldProps>((_) => ({
+  borderRadius: 12,
+}));
+
 function TextField({ name, ...props }: TProps) {
   const [field, metaData] = useField(name);
   const configTextField: TextFieldProps = {
@@ -11,12 +20,13 @@ function TextField({ name, ...props }: TProps) {
     ...field,
     fullWidth: true,
     variant: "outlined",
+    size: "small",
   };
   if (metaData?.touched && metaData.error) {
     configTextField.error = true;
     configTextField.helperText = metaData.error;
   }
-  return <TextFieldMui size="small" {...configTextField} />;
+  return <StyledTextField {...configTextField} />;
 }
 
 export default TextField;

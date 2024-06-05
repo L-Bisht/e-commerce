@@ -7,7 +7,6 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   IconButton,
-  Button,
   Badge,
   AppBar,
   Toolbar,
@@ -17,6 +16,7 @@ import {
 } from "@mui/material";
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import SearchBar from "../SearchBar";
+import StyledButton from "../FormsUI/StyledButton/StyledButton";
 
 function Header() {
   const [searchText, setSearchText] = useState<string>("");
@@ -75,13 +75,13 @@ function Header() {
                 <LoginMenu />
               </>
             ) : (
-              <Button
+              <StyledButton
                 onClick={() => navigate("/login")}
                 color="secondary"
                 variant="contained"
               >
-                Log in
-              </Button>
+                Login
+              </StyledButton>
             )}
           </Stack>
         </Stack>

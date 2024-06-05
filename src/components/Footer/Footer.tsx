@@ -2,7 +2,7 @@ import { Box, Divider, Stack, Typography } from "@mui/material";
 
 const Footer = () => {
   return (
-    <Box sx={{ background: "#111827" }} width="100%">
+    <Box width="100%">
       <Stack width="100%" divider={<Divider />}>
         <Stack></Stack>
         <Stack p={2} direction="row">

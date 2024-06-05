@@ -1,11 +1,12 @@
 import { Form, Formik } from "formik";
 import * as yup from "yup";
-import { Button, Divider, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 import TextField from "../../components/FormsUI/TextField";
 import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
 import { loginUser } from "../../store/authenticationSlice";
+import StyledButton from "../../components/FormsUI/StyledButton/StyledButton";
 
 type TLoginFormSchema = {
   username: string;
@@ -51,9 +52,9 @@ function LoginPage() {
               type="password"
               label="Password"
             />
-            <Button fullWidth type="submit" variant="contained">
-              LogIn
-            </Button>
+            <StyledButton fullWidth type="submit" variant="contained">
+              Continue
+            </StyledButton>
             <Divider flexItem>
               <Typography variant="body2">OR</Typography>
             </Divider>

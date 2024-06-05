@@ -1,9 +1,10 @@
 import { Form, Formik } from "formik";
 import * as yup from "yup";
-import { Button, Card, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import TextField from "../../components/FormsUI/TextField";
+import StyledButton from "../../components/FormsUI/StyledButton/StyledButton";
 
 type TSignUpFormSchema = {
   email: string;
@@ -49,9 +50,9 @@ function SignUpPage() {
               type="password"
               label="Confirm Password"
             />
-            <Button fullWidth type="submit" variant="contained">
-              SignUp
-            </Button>
+            <StyledButton fullWidth type="submit" variant="contained">
+              Continue
+            </StyledButton>
             <Divider flexItem>
               <Typography variant="body2">OR</Typography>
             </Divider>
