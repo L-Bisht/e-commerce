@@ -10,7 +10,7 @@ const Layout = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateRows: "80px 1fr 414px",
+          gridTemplateRows: "80px 1fr auto",
           minHeight: "100vh",
         }}
       >
