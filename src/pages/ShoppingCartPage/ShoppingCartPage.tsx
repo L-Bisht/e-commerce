@@ -1,13 +1,11 @@
 import { Box, Card, Divider, Grid, Typography } from "@mui/material";
-import "./ShoppingCartPage.css";
 import { useSelector } from "react-redux";
-import { TRootState } from "../../store";
+
 import CartItem from "../../components/CartItem";
+import { cartsSelector } from "../../store/cartSlice";
 
 function ShoppingCartPage() {
-  const currentCart = useSelector(
-    (state: TRootState) => state.cart.allCarts?.[0] || {}
-  );
+  const currentCart = useSelector(cartsSelector)?.[0];
   return (
     <Box className="page" padding="80px">
       <Card variant="outlined" sx={{ height: "100%", borderRadius: "30px" }}>

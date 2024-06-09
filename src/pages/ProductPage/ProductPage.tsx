@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import ProductImages from "../../components/ProductImages";
 import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
 import { fetchProduct, productSelector } from "../../store/productSlice";
+import ProductDetailsCard from "../../components/ProductDetailsCard";
 
 const ProductPage = () => {
   const { productId = "" } = useParams();
@@ -16,7 +17,14 @@ const ProductPage = () => {
   }, [productId, dispatch]);
   return (
     <Box>
-      <ProductImages images={product.images || []} />
+      <Stack direction="row" spacing={3}>
+        <ProductImages images={product.images || []} />
+        <ProductDetailsCard
+          name={product.name}
+          price={product.price || 0}
+          rating={product.rating || 0}
+        />
+      </Stack>
     </Box>
   );
 };

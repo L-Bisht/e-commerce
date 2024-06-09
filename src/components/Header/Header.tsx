@@ -1,4 +1,3 @@
-import "./Header.css";
 import { TRootState } from "../../store";
 import LoginMenu from "../LoginMenu";
 
@@ -17,6 +16,7 @@ import {
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import SearchBar from "../SearchBar";
 import StyledButton from "../FormsUI/StyledButton/StyledButton";
+import { cartsSelector } from "../../store/cartSlice";
 
 function Header() {
   const [searchText, setSearchText] = useState<string>("");
@@ -24,9 +24,8 @@ function Header() {
   const isAuthenticated = useSelector(
     (state: TRootState) => state.authentication?.isAuthenticated
   );
-  const cartItemCount = useSelector(
-    (state: TRootState) => state.cart.allCarts?.find(Boolean)?.products?.length
-  );
+  const cartItemCount =
+    useSelector(cartsSelector)?.find(Boolean)?.products?.length;
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate({

@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TProduct } from "../shared/types/productTypes";
+import { TDummyJSONProduct, TProduct } from "../shared/types/productTypes";
 import axios from "axios";
 import { TRootState } from ".";
+import { dummJsonProductTransformer } from "../shared/utils/transformers/productTransformer";
 
 type TState = {
   selectedProduct: TProduct;
@@ -41,7 +42,9 @@ const productSlice = createSlice({
         state.status = "pending";
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        state.selectedProduct = action.payload as TProduct;
+        state.selectedProduct = dummJsonProductTransformer(
+          action.payload as TDummyJSONProduct
+        );
         state.status = "succeded";
       })
       .addCase(fetchProduct.rejected, (state, action) => {

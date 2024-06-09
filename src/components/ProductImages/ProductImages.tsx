@@ -28,7 +28,7 @@ function ProductImages({ images = [] }: TProps) {
       </Stack>
       <Box
         sx={{
-          width: "358px",
+          width: "640px",
           height: "290px",
           background: `url(${selectedImage || images?.[0]})`,
           backgroundSize: "contain",

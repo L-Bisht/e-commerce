@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import GradeIcon from "@mui/icons-material/Grade";
 
-import "./ProductCard.css";
 import { TProduct } from "../../shared/types/productTypes";
 
 type TProps = TProduct & {
@@ -24,15 +23,15 @@ function ProductCard({
   category,
 }: TProps) {
   return (
-    <Card sx={{ borderRadius: "8px", width: "349" }} variant="outlined">
+    <Card sx={{ borderRadius: "8px", minWidth: "300px" }} variant="outlined">
       <CardActionArea
         onClick={handleClick}
         sx={{ pt: "12px", pl: "12px", pr: "12px" }}
       >
         <CardMedia
-          className="product-card__image"
           component="img"
           height="300"
+          sizes="cover"
           image={images?.[0]}
           alt={name}
         />

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import productTransformer from "../shared/utils/transformers/productTransformer";
+import { dummyJSONProductsTransformer } from "../shared/utils/transformers/productTransformer";
 import {
   TDummyJSONProductResponse,
   TProduct,
@@ -49,7 +49,9 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.products =
-          productTransformer(action.payload as TDummyJSONProductResponse) || [];
+          dummyJSONProductsTransformer(
+            action.payload as TDummyJSONProductResponse
+          ) || [];
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.error = action.payload as string;

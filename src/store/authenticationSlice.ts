@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { TRootState } from ".";
 
 export type TUserData = {
   id: number;
@@ -30,10 +31,13 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 export const loginUser = createAsyncThunk(
   "authentication/login",
-  async (payload: {
-    username: string;
-    password: string;
-  }): Promise<TUserData | string> => {
+  async (
+    payload: {
+      username: string;
+      password: string;
+    },
+    thunkAPI
+  ) => {
     try {
       const loginUrl = new URL(`${baseURL}/auth/login`);
       const response = await axios.post(loginUrl.toString(), {
@@ -41,8 +45,9 @@ export const loginUser = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      if (error instanceof Error) return error.message;
-      return String(error);
+      thunkAPI.rejectWithValue({
+        error: error instanceof Error ? error.message : String(error),
+      });
     }
   }
 );
@@ -63,6 +68,8 @@ const authenticationSlice = createSlice({
         state.status = "error";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        console.log("inside fullfilled");
+
         state.isAuthenticated = true;
         const userData = action.payload as TUserData;
         state.access_token = userData.token;
@@ -75,6 +82,11 @@ const authenticationSlice = createSlice({
       });
   },
 });
+
+export const isAuthenticatedSelector = (state: TRootState) =>
+  state.authentication.isAuthenticated;
+export const userDataSelector = (state: TRootState) =>
+  state.authentication.userData;
 
 export const { logout } = authenticationSlice.actions;
 

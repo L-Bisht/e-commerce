@@ -11,6 +11,14 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProductPage from "./pages/ProductPage";
 import Layout from "./components/Layout";
 import "./App.css";
+import { useSelector } from "react-redux";
+import {
+  isAuthenticatedSelector,
+  userDataSelector,
+} from "./store/authenticationSlice";
+import { useEffect } from "react";
+import useAppDispatch from "./shared/utils/customHooks/useAppDispatch";
+import { getCartsByUser } from "./store/cartSlice";
 
 const theme = createTheme({
   palette: {
@@ -20,6 +28,9 @@ const theme = createTheme({
     secondary: {
       main: "#0EA5E9",
     },
+    warning: {
+      main: "#FBBF24",
+    },
     text: {
       primary: "#111827",
       secondary: "#4B5563",
@@ -27,6 +38,14 @@ const theme = createTheme({
   },
 });
 function App() {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const userId = useSelector(userDataSelector).id;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getCartsByUser({ userId }));
+    }
+  }, [isAuthenticated, dispatch, userId]);
   return (
     <ThemeProvider theme={theme}>
       <Routes>
