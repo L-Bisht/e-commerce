@@ -5,7 +5,7 @@ import CartItem from "../../components/CartItem";
 import { cartsSelector } from "../../store/cartSlice";
 
 function ShoppingCartPage() {
-  const currentCart = useSelector(cartsSelector)?.[0];
+  const cart = useSelector(cartsSelector);
   return (
     <Box className="page" padding="80px">
       <Card variant="outlined" sx={{ height: "100%", borderRadius: "30px" }}>
@@ -13,14 +13,20 @@ function ShoppingCartPage() {
           <Grid item sm={12} md={9}>
             <Box height="100%" padding="50px">
               <Typography variant="h4">Shopping Cart</Typography>
-              <Box>
-                {currentCart.products?.map((cartItem, i, allItems) => (
-                  <>
-                    <CartItem key={cartItem.id} item={cartItem} />
-                    {i < allItems.length - 1 && <Divider variant="fullWidth" />}
-                  </>
-                ))}
-              </Box>
+              {cart?.products?.length ? (
+                <Box>
+                  {cart?.products?.map((cartItem, i, allItems) => (
+                    <>
+                      <CartItem key={cartItem.id} item={cartItem} />
+                      {i < allItems.length - 1 && (
+                        <Divider variant="fullWidth" />
+                      )}
+                    </>
+                  ))}
+                </Box>
+              ) : (
+                <Typography>No items in the cart</Typography>
+              )}
             </Box>
           </Grid>
           <Grid item sm={12} md={3}>

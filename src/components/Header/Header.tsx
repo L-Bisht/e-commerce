@@ -24,8 +24,8 @@ function Header() {
   const isAuthenticated = useSelector(
     (state: TRootState) => state.authentication?.isAuthenticated
   );
-  const cartItemCount =
-    useSelector(cartsSelector)?.find(Boolean)?.products?.length;
+  const cartItemCount = useSelector(cartsSelector)?.products?.length || 0;
+
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate({

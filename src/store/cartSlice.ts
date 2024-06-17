@@ -24,18 +24,34 @@ export type TCart = {
 };
 
 type TState = {
-  userCarts: Array<TCart>;
+  userCart: TCart;
   status: "idle" | "pending" | "error" | "succeded";
   error: null | string;
 };
 
-const baseURL = import.meta.env.VITE_BASE_URL;
+const baseURL = import.meta.env.VITE_BASE_URL + "/carts";
 
-export const getCartsByUser = createAsyncThunk(
-  "carts/getCartsByUser",
+export const getCartByUser = createAsyncThunk(
+  "cart/getCartsByUser",
   async ({ userId }: { userId: number }) => {
     try {
-      const response = await axios.get(`${baseURL}/carts/user/${userId}`);
+      const response = await axios.get(`${baseURL}/user/${userId}`);
+      return response.data;
+    } catch (error) {
+      if (error instanceof Error) return error.message;
+      return error;
+    }
+  }
+);
+
+export const updateCart = createAsyncThunk(
+  "carts/updateCart",
+  async ({ cartId, products }: { cartId: number; products: object }) => {
+    try {
+      const response = await axios.put(`${baseURL}/${cartId}`, {
+        merge: true,
+        products,
+      });
       return response.data;
     } catch (error) {
       if (error instanceof Error) return error.message;
@@ -45,30 +61,40 @@ export const getCartsByUser = createAsyncThunk(
 );
 
 const initialState: TState = {
-  userCarts: [],
+  userCart: {} as TCart,
   status: "idle",
   error: null,
 };
 
 const cartSlice = createSlice({
-  name: "carts",
+  name: "cart",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCartsByUser.pending, (state) => {
+      .addCase(getCartByUser.pending, (state) => {
         state.status = "pending";
       })
-      .addCase(getCartsByUser.fulfilled, (state, action) => {
-        state.userCarts = action.payload.carts;
+      .addCase(getCartByUser.fulfilled, (state, action) => {
+        state.userCart = action.payload.carts?.[0] || {};
       })
-      .addCase(getCartsByUser.rejected, (state, action) => {
+      .addCase(getCartByUser.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.payload as string;
+      })
+      .addCase(updateCart.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(updateCart.fulfilled, (state, action) => {
+        state.userCart = action.payload;
+      })
+      .addCase(updateCart.rejected, (state, action) => {
         state.status = "error";
         state.error = action.payload as string;
       });
   },
 });
 
-export const cartsSelector = (state: TRootState) => state.cart.userCarts;
+export const cartsSelector = (state: TRootState) => state.cart.userCart;
 
 export default cartSlice.reducer;

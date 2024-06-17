@@ -30,8 +30,12 @@ function LoginPage() {
       username: values.username,
       password: values.password,
     };
-    dispatch(loginUser(payload));
-    navigate("/");
+    try {
+      dispatch(loginUser(payload));
+      navigate("/");
+    } catch (err) {
+      console.log("inside inside error");
+    }
   };
   return (
     <Stack alignItems="center">

@@ -45,7 +45,7 @@ export const loginUser = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      thunkAPI.rejectWithValue({
+      return thunkAPI.rejectWithValue({
         error: error instanceof Error ? error.message : String(error),
       });
     }
@@ -68,8 +68,6 @@ const authenticationSlice = createSlice({
         state.status = "error";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log("inside fullfilled");
-
         state.isAuthenticated = true;
         const userData = action.payload as TUserData;
         state.access_token = userData.token;

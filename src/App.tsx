@@ -18,7 +18,7 @@ import {
 } from "./store/authenticationSlice";
 import { useEffect } from "react";
 import useAppDispatch from "./shared/utils/customHooks/useAppDispatch";
-import { getCartsByUser } from "./store/cartSlice";
+import { getCartByUser } from "./store/cartSlice";
 
 const theme = createTheme({
   palette: {
@@ -43,7 +43,7 @@ function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(getCartsByUser({ userId }));
+      dispatch(getCartByUser({ userId }));
     }
   }, [isAuthenticated, dispatch, userId]);
   return (

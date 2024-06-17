@@ -39,7 +39,7 @@ const Footer = () => {
     <Box bgcolor="primary.main" color="white" width="100%">
       <Stack width="100%">
         <Grid width="100%" px={12} py={6} container rowGap={3} columnGap={3}>
-          <Grid item xs={4} sm={2.5}>
+          <Grid item xs={12} sm={2.5}>
             <Stack spacing={1}>
               <Typography>eCommerce</Typography>
               {socialIcons.map(({ name, icon }) => (
@@ -51,7 +51,7 @@ const Footer = () => {
             </Stack>
           </Grid>
           {FOOTER_DATA.map((item) => (
-            <Grid item key={item.id} xs={4} sm={2.5}>
+            <Grid item key={item.id} xs={12} sm={2.5}>
               <Stack spacing={1}>
                 <Typography>{item.title}</Typography>
                 {item.subItems.map((item) => (
