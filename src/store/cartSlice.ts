@@ -46,10 +46,27 @@ export const getCartByUser = createAsyncThunk(
 
 export const updateCart = createAsyncThunk(
   "carts/updateCart",
-  async ({ cartId, products }: { cartId: number; products: object }) => {
+  async ({
+    cartId,
+    products,
+    createNew,
+    userId,
+  }: {
+    cartId: number;
+    products: object;
+    createNew: boolean;
+    userId?: number;
+  }) => {
     try {
-      const response = await axios.put(`${baseURL}/${cartId}`, {
-        merge: true,
+      if (!createNew) {
+        const response = await axios.put(`${baseURL}/${cartId}`, {
+          merge: true,
+          products,
+        });
+        return response.data;
+      }
+      const response = await axios.post(`${baseURL}/add`, {
+        userId,
         products,
       });
       return response.data;
@@ -76,6 +93,7 @@ const cartSlice = createSlice({
         state.status = "pending";
       })
       .addCase(getCartByUser.fulfilled, (state, action) => {
+        console.log("Cart called", action.payload);
         state.userCart = action.payload.carts?.[0] || {};
       })
       .addCase(getCartByUser.rejected, (state, action) => {

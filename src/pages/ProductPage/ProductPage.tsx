@@ -20,9 +20,11 @@ const ProductPage = () => {
       <Stack direction="row" spacing={3}>
         <ProductImages images={product.images || []} />
         <ProductDetailsCard
+          id={product.id}
           name={product.name}
           price={product.price || 0}
           rating={product.rating || 0}
+          description={product.description}
         />
       </Stack>
     </Box>

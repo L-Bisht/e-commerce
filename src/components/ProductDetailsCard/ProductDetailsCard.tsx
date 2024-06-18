@@ -4,15 +4,43 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import Rating from "../Rating/Rating";
 import StyledButton from "../FormsUI/StyledButton/StyledButton";
 import QuantitySelector from "../QuantitySelector/QuantitySelector";
+import useAppDispatch from "../../shared/utils/customHooks/useAppDispatch";
+import { cartsSelector, updateCart } from "../../store/cartSlice";
+import { useSelector } from "react-redux";
+import {
+  isAuthenticatedSelector,
+  userDataSelector,
+} from "../../store/authenticationSlice";
+import { useNavigate } from "react-router-dom";
 
 type TProps = {
+  id: string | number;
   price: number;
   rating: number;
   name: string;
+  description?: string;
 };
 
 const ProductDetailsCard = (props: TProps) => {
-  const updateCart = () => {};
+  const dispatch = useAppDispatch();
+  const cartId = useSelector(cartsSelector)?.id;
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const userId = useSelector(userDataSelector)?.id;
+  const navigate = useNavigate();
+  const handleAddToCart = () => {
+    if (isAuthenticated) {
+      dispatch(
+        updateCart({
+          cartId,
+          products: [{ id: props.id, quantity: 1 }],
+          createNew: !cartId,
+          userId,
+        })
+      );
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <Card
       variant="outlined"
@@ -22,6 +50,7 @@ const ProductDetailsCard = (props: TProps) => {
         <Typography variant="h4" fontWeight="bold">
           {props.name}
         </Typography>
+        <Typography variant="body1">{props.description}</Typography>
         <Stack direction="row" justifyContent="space-between">
           <Rating rating={props.rating} />
           <Typography variant="h6" fontWeight="bold">
@@ -31,7 +60,7 @@ const ProductDetailsCard = (props: TProps) => {
         <Stack width="100%" direction="row" justifyContent="space-between">
           <QuantitySelector />
           <StyledButton
-            onClick={() => updateCart()}
+            onClick={() => handleAddToCart()}
             size="large"
             variant="contained"
           >
