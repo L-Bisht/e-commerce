@@ -46,7 +46,18 @@ function Header() {
           width="100%"
         >
           <ButtonBase onClick={() => navigate("/")}>
-            <Typography variant="h4" fontWeight="700">
+            <Typography
+              variant="h4"
+              fontWeight="700"
+              sx={{ display: { xs: "inline", sm: "none" } }}
+            >
+              e
+            </Typography>
+            <Typography
+              sx={{ display: { xs: "none", sm: "inline" } }}
+              variant="h4"
+              fontWeight="700"
+            >
               eCommerce
               <Typography variant="inherit" color="error" display="inline">
                 .

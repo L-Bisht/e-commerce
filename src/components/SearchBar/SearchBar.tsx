@@ -14,7 +14,7 @@ const SearchBar = ({ value, onChange, onSubmit }: TProps) => {
       component="form"
       sx={{
         p: "2px 4px",
-        display: { xs: "none", md: "flex" },
+        display: "flex",
         alignItems: "center",
         width: 400,
         borderRadius: "40px",

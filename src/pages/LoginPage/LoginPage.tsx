@@ -32,7 +32,7 @@ function LoginPage() {
     };
     try {
       dispatch(loginUser(payload));
-      navigate("/");
+      navigate(-1);
     } catch (err) {
       console.log("inside inside error");
     }

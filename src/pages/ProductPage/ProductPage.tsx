@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,9 +16,11 @@ const ProductPage = () => {
     dispatch(fetchProduct({ productId }));
   }, [productId, dispatch]);
   return (
-    <Box>
-      <Stack direction="row" spacing={3}>
+    <Grid container rowSpacing={5} columnSpacing={3}>
+      <Grid item xs={12} sm={6}>
         <ProductImages images={product.images || []} />
+      </Grid>
+      <Grid item xs={12} sm={6}>
         <ProductDetailsCard
           id={product.id}
           name={product.name}
@@ -26,8 +28,8 @@ const ProductPage = () => {
           rating={product.rating || 0}
           description={product.description}
         />
-      </Stack>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 
